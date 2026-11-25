@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pte
+tokenizer.model
+llama_main
+libc++_shared.so
+inspection_log.csv
+llama_last_raw.txt
+*.zip
+test_images/
+test_labels/
+clean_test/
+.ipynb_checkpoints/
