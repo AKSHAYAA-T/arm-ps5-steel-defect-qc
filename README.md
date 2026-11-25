@@ -108,4 +108,4 @@ See the final report for detail. In short: NEU-DET is a lab dataset of small 200
 
 ## License
 
-`[[LICENSE: MIT recommended for our code; third-party models and datasets keep their own licences]]`
+No licence file yet. Built with Ultralytics YOLO11 (AGPL-3.0), ONNX Runtime (MIT), ExecuTorch (BSD) and Llama 3.2 (Llama 3.2 Community License); check those terms before reuse.
