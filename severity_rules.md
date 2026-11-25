@@ -22,7 +22,7 @@ Operator action from the rules (used when Llama is off or fails):
 - Low: pass with a note, watch the next parts.
 
 ## Code
-`SEVERITY_RULES` and `severity_for()` in `pipeline/qc_inspector.py`.
+`SEVERITY_RULES` and `severity_for()` in `qc_inspector.py`.
 
 ## Limits
 Thresholds are a documented starting point in % of image area. NEU-DET does not publish a physical scale (mm per pixel), so they are not tied to a millimetre tolerance. On a real line they should be set from the plant's acceptance standard and the camera's calibrated field of view.

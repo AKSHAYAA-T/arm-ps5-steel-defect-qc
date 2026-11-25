@@ -52,21 +52,22 @@ Full numbers and method: [`benchmarks.md`](benchmarks.md) and the final report.
 
 ## Repository layout
 
-All files are in the repository root:
+```
+├── README.md                     this file
+├── qc_inspector.py               the on-device pipeline (vision + rules + Llama + log + benchmark)
+├── RUN_ON_PHONE.md               how to install and run it on the phone (Termux)
+├── train_yolo11n_neu_640.ipynb   Colab: NEU-DET download, YOLO training at 640, ONNX export (main model)
+├── train_yolo11n_neu_320.ipynb   same at 320 (speed comparison)
+├── llama_executorch_setup.md     building llama_main with ExecuTorch and running Llama on the phone
+├── severity_rules.md             how Low / Medium / High is decided
+├── benchmarks.md                 all measured numbers
+├── yolo11n_neu_640.onnx          main detector (640 input), ONNX, ~10 MB
+├── yolo11n_neu.onnx              speed-comparison detector (320 input), ONNX
+├── labels.txt                    class names in index order
+└── results/figures/              pipeline diagram
+```
 
-```
-README.md                      this file
-qc_inspector.py                the on-device pipeline (vision + rules + Llama + log + benchmark)
-yolo11n_neu_640.onnx           main detector (640 input), ONNX
-yolo11n_neu.onnx               speed-comparison detector (320 input), ONNX
-labels.txt                     class names
-train_yolo11n_neu_640.ipynb    Colab: NEU-DET download, YOLO training at 640, ONNX export (main model)
-train_yolo11n_neu_320.ipynb    same at 320 (speed comparison)
-llama_executorch_setup.md      building llama_main with ExecuTorch and running Llama on the phone
-severity_rules.md              how Low / Medium / High is decided
-benchmarks.md                  all measured numbers
-results/figures/architecture.png  pipeline diagram
-```
+The Llama 3.2 1B `.pte` (1.1 GB) and `tokenizer.model` are not stored here: download them from Hugging Face `executorch-community/Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8-ET` (see `llama_executorch_setup.md`).
 
 ## Quick start (Samsung S20 FE or any arm64 Android phone, Termux)
 
