@@ -3,8 +3,7 @@
 **Arm Bharat AI-SoC Challenge 2026, Problem Statement 5: real-time industrial defect detection and quality-control assistant on an Arm SoC.**
 
 Team: 
-AKSHAYAA T
-MANUSHRI RAVI SHANKARAN 
+AKSHAYAA T  | MANUSHRI RAVI SHANKARAN 
 PSG INSITUTE OF TECHNOLOGY AND APPLIED RESEARCH
 
 A fully offline quality-control assistant for hot-rolled steel strip. It runs entirely on the Arm CPU of a Samsung Galaxy S20 FE 5G (Snapdragon 865):
