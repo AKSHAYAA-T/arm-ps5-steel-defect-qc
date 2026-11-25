@@ -44,32 +44,28 @@ Test set: 361 NEU-DET validation images, never seen in training. Box-level metri
 | Total advisory time per FAIL (20-image run) | 8.77 s mean, 9.1 s p95 |
 | Memory (peak RSS) | ~1.37 GB |
 
-Confidence threshold: default 0.25 (best F1), `--conf 0.15` as a zero-miss mode; full sweep and clean-surface test in `results/benchmarks.md`.
+Confidence threshold: default 0.25 (best F1), `--conf 0.15` as a zero-miss mode; full sweep and clean-surface test in `benchmarks.md`.
 
 Power (continuous 640 vision, airplane mode, screen on): **5.3 W vs 0.67 W idle**, about 0.54 J per image above idle; battery 36.1 → 42.4 °C over 5 minutes with ~6% slowdown (113 → 121 ms) from mild thermal throttling.
 
-Full numbers and method: [`results/benchmarks.md`](results/benchmarks.md) and the final report.
+Full numbers and method: [`benchmarks.md`](benchmarks.md) and the final report.
 
 ## Repository layout
 
+All files are in the repository root:
+
 ```
-├── README.md                     this file
-├── pipeline/
-│   ├── qc_inspector.py           the on-device pipeline (vision + rules + Llama + log + benchmark)
-│   └── README.md                 how to install and run it on the phone (Termux)
-├── notebooks/
-│   ├── train_yolo11n_neu_640.ipynb   Colab: NEU-DET download, YOLO training at 640, ONNX export (main model)
-│   └── train_yolo11n_neu_320.ipynb   same at 320 (speed comparison)
-├── docs/
-│   ├── llama_executorch_setup.md     building llama_main with ExecuTorch and running Llama on the phone
-│   └── severity_rules.md             how Low / Medium / High is decided
-├── yolo11n_neu_640.onnx          main detector (640 input), ONNX
-├── yolo11n_neu.onnx              speed-comparison detector (320 input), ONNX
-├── labels.txt                    class names
-├── models/README.md              model details and Llama download link
-└── results/
-    ├── benchmarks.md             all measured numbers
-    └── figures/                  training curves, confusion matrix, annotated examples
+README.md                      this file
+qc_inspector.py                the on-device pipeline (vision + rules + Llama + log + benchmark)
+yolo11n_neu_640.onnx           main detector (640 input), ONNX
+yolo11n_neu.onnx               speed-comparison detector (320 input), ONNX
+labels.txt                     class names
+train_yolo11n_neu_640.ipynb    Colab: NEU-DET download, YOLO training at 640, ONNX export (main model)
+train_yolo11n_neu_320.ipynb    same at 320 (speed comparison)
+llama_executorch_setup.md      building llama_main with ExecuTorch and running Llama on the phone
+severity_rules.md              how Low / Medium / High is decided
+benchmarks.md                  all measured numbers
+results/figures/architecture.png  pipeline diagram
 ```
 
 ## Quick start (Samsung S20 FE or any arm64 Android phone, Termux)
@@ -78,8 +74,8 @@ Full numbers and method: [`results/benchmarks.md`](results/benchmarks.md) and th
    ```
    pkg install -y python python-numpy python-pillow python-onnxruntime unzip
    ```
-2. Put `pipeline/qc_inspector.py`, `yolo11n_neu_640.onnx` and `labels.txt` (repo root) in `~/qc`. Put a test set (images + YOLO label files) in `~/qc/test_images` and `~/qc/test_labels` (the training notebook builds one).
-3. Set up Llama in `~/llama` (`llama_main`, `libc++_shared.so`, the `.pte` and `tokenizer.model`): see [`docs/llama_executorch_setup.md`](docs/llama_executorch_setup.md).
+2. Put `qc_inspector.py`, `yolo11n_neu_640.onnx` and `labels.txt` in `~/qc`. Put a test set (images + YOLO label files) in `~/qc/test_images` and `~/qc/test_labels` (the training notebook builds one).
+3. Set up Llama in `~/llama` (`llama_main`, `libc++_shared.so`, the `.pte` and `tokenizer.model`): see [`llama_executorch_setup.md`](llama_executorch_setup.md).
 4. Run:
    ```
    cd ~/qc
@@ -92,7 +88,7 @@ Useful flags: `--conf` (confidence threshold, default 0.25), `--no-llama` (visio
 
 ## Reproduce training
 
-Open `notebooks/train_yolo11n_neu_640.ipynb` in Google Colab with a T4 GPU and run top to bottom (about 45 to 60 minutes). It downloads NEU-DET from Kaggle, trains YOLO11n (COCO-pretrained, seed 0), prints per-class metrics, exports `yolo11n_neu_640.onnx` and builds a phone bundle with the validation images as the test set.
+Open `train_yolo11n_neu_640.ipynb` in Google Colab with a T4 GPU and run top to bottom (about 45 to 60 minutes). It downloads NEU-DET from Kaggle, trains YOLO11n (COCO-pretrained, seed 0), prints per-class metrics, exports `yolo11n_neu_640.onnx` and builds a phone bundle with the validation images as the test set.
 
 ## Datasets and models
 
